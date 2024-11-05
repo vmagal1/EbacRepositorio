@@ -1,9 +1,10 @@
-
+import matplotlib.pyplot as plt
 import pandas            as pd
 import streamlit         as st
-import matplotlib.pyplot as plt
 import seaborn           as sns
 from PIL                 import Image
+
+
 
 custom_params = {"axes.spines.right": False, "axes.spines.top": False}
 sns.set_theme(style="ticks", rc=custom_params)
@@ -31,6 +32,8 @@ def main():
     bank_raw = pd.read_csv("C:\\Users\\vmaga\\Desktop\\EBAC TAREFAS\\EbacRepositorio\\Mod 19\\data\\input\\bank-additional-full.csv", sep=';')
 
     bank = bank_raw.copy()
+    st.write('## Antes dos filtros')
+    st.write(bank_raw.head())
 
     with st.sidebar.form(key='my_form'):
     
@@ -121,7 +124,7 @@ def main():
     st.markdown("---")
 
     # PLOTS    
-    fig, ax = plt.subplots(1, 2, figsize = (5,3))
+    fig, ax = plt.subplots(1, 2, figsize = (10,5))
 
     bank_raw_target_perc = bank_raw.y.value_counts(normalize = True).to_frame()*100
     bank_raw_target_perc = bank_raw_target_perc.sort_index()
